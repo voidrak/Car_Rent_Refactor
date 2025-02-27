@@ -22,6 +22,20 @@ export const useCarStore = defineStore("carStore", {
 
       return data;
     },
+    /*********************  Get Available Cars ********************** */
+
+    async getAvailableCars() {
+      const res = await fetch("/api/available-cars/", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+        },
+      });
+      const data = await res.json();
+
+      return data;
+    },
     /*********************  Get A Car ********************** */
 
     async getCar(car) {

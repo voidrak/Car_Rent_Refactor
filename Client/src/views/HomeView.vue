@@ -1,5 +1,13 @@
 <script setup>
 import UserLayout from '@/layout/UserLayout.vue';
+import { useCarStore } from '@/stores/car';
+import { onMounted, ref } from 'vue';
+
+const { getAvailableCars } = useCarStore();
+const availableCars = ref([]);
+onMounted(async () => {
+  availableCars.value = await getAvailableCars()
+})
 
 </script>
 
