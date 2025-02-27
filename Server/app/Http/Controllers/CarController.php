@@ -18,7 +18,7 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $request->validate([
             'brand' => 'required|string|max:255',
             'model' => 'required|string|max:255',
@@ -38,12 +38,14 @@ class CarController extends Controller
         $car->status = $request->status;
 
 
-        if ($request->hasFile('image')) {
-            $imageName = $request->brand . '-' . $request->model . '-' . $request->engine . '-' . Str::random(10) . '.' . $request->file('image')->extension();
-            $image = $request->file('image');
-            $path = $image->storeAs('images/cars', $imageName);
-            $car->image = '/' . $path;
-        }
+        $path = $request->file('image')->store('car_images', 'public');
+        $car->image = $path;
+        // if ($request->hasFile('image')) {
+        //     $imageName = $request->brand . '-' . $request->model . '-' . $request->engine . '-' . Str::random(10) . '.' . $request->file('image')->extension();
+        //     $image = $request->file('image');
+        //     $path = $image->storeAs('images/cars', $imageName);
+        //     $car->image = '/' . $path;
+        // }
 
         $car->save();
 

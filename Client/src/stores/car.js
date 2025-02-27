@@ -54,13 +54,16 @@ export const useCarStore = defineStore("carStore", {
     /*********************  Create Car ********************** */
 
     async createCar(formData) {
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ':', pair[1]);
+      }
       const res = await fetch("/api/cars", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
 
-        body: JSON.stringify(formData),
+        body: formData, 
       });
 
       const data = await res.json();
@@ -68,8 +71,9 @@ export const useCarStore = defineStore("carStore", {
       if (data.errors) {
         this.errors = data.errors;
       } else {
+        console.log("Successfully Created");
         this.errors = {};
-        this.router.push({ name: "adminHome" });
+        router.push({ name: "ManagerCars" });
       }
     },
 
@@ -81,7 +85,7 @@ export const useCarStore = defineStore("carStore", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(formdata),
+        body: formdata
       })
 
       const data = await res.json();
