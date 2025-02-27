@@ -6,6 +6,8 @@ import ContactUsPage from '@/views/User/ContactUsPage.vue'
 import LocationPage from '@/views/User/LocationPage.vue'
 import CarsListPage from '@/views/User/CarsListPage.vue'
 import CarReservationPage from '@/views/User/CarReservationPage.vue'
+import AdminHome from '@/views/Admin/AdminHome.vue'
+import ManagerHome from '@/views/Manager/ManagerHome.vue'
 
 
 
@@ -50,7 +52,18 @@ const router = createRouter({
       name: 'CarReservation',
       component: CarReservationPage,
       meta: { auth: true }
-
+    },
+    {
+      path: '/admin/home',
+      name: 'AdminHome',
+      component: AdminHome,
+      meta: { admin: true }
+    },
+    {
+      path: '/manager/home',
+      name: 'ManagerHome',
+      component: ManagerHome,
+      meta: { manager: true }
     },
 
   ],
