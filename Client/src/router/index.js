@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from "@/stores/auth";
 import HomeView from '../views/HomeView.vue'
 import LoginPage from '@/views/Auth/LoginPage.vue'
 import RegisterPage from '@/views/Auth/RegisterPage.vue'
@@ -89,5 +90,43 @@ const router = createRouter({
 
   ],
 })
+
+router.beforeEach(async (to, from) => {
+  const authStore = useAuthStore();
+  await authStore.getUser();
+
+  if (authStore.user?.role === "manager" && to.meta.guest) {
+    return { name: "ManagerHome" };
+  }
+  if (authStore.user?.role === "manager" && to.meta.auth) {
+    return { name: "ManagerHome" };
+  }
+  if (authStore.user?.role === "manager" && to.meta.admin) {
+    return { name: "ManagerHome" };
+  }
+
+
+  if (authStore.user?.role === "admin" && to.meta.guest) {
+    return { name: "adminHome" };
+  }
+  if (authStore.user?.role === "admin" && to.meta.auth) {
+    return { name: "adminHome" };
+  }
+  if (authStore.user?.role === "admin" && to.meta.manager) {
+    return { name: "adminHome" };
+  }
+
+
+
+  if (authStore.user && to.meta.guest) {
+    return { name: "Home" };
+  }
+  if (!authStore.user && to.meta.auth) {
+    return { name: "Login" };
+  }
+  if (!authStore.user && to.meta.CustomerService) {
+    return { name: "Login" };
+  }
+});
 
 export default router
