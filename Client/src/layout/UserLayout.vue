@@ -18,7 +18,7 @@
             </button>
 
           </RouterLink>
-          <a href="{{ route('register') }}">
+          <RouterLink :to="{ name: 'Register' }">
             <button
               class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 ark:text-white ark:hover:text-gray-900 ">
               <span
@@ -26,7 +26,7 @@
                 Register
               </span>
             </button>
-          </a>
+          </RouterLink>
           <button data-collapse-toggle="mobile-menu-2" type="button"
             class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 ark:text-gray-400 ark:hover:bg-gray-700 ark:focus:ring-gray-600"
             aria-controls="mobile-menu-2" aria-expanded="false">
