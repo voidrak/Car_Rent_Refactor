@@ -12,11 +12,33 @@ const formData = ref({
   quantity: '',
   price_per_day: '',
   status: '',
-  image: '',
+  image: null
 });
 
+
+
+  const imagePreview = ref(null);
+
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+  formData.value.image = file;
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imagePreview.value = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    imagePreview.value = null;
+  }
+};
+
 const submitForm = async () => {
-  await carStore.createCar(formData.value);
+  const formDataToSend = new FormData();
+  for (const key in formData.value) {
+    formDataToSend.append(key, formData.value[key]);
+  }
+  await carStore.createCar(formDataToSend);
 };
 
 </script>
@@ -83,7 +105,7 @@ const submitForm = async () => {
                 <label for="price_per_day" class="block text-sm font-medium leading-6 text-gray-900">Price per
                   day</label>
                 <div class="mt-2">
-                  <input type="text" name="price_per_day" id="price_per_day"
+                  <input v-model="formData.price_per_day" type="number" name="price_per_day" id="price_per_day"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                 </div>
                 <!-- @error('price_per_day')
@@ -94,7 +116,8 @@ const submitForm = async () => {
               <div class="col-span-full">
                 <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover
                   photo</label>
-                <div class="flex justify-center px-6 py-10 mt-2 border border-dashed rounded-lg border-gray-900/25">
+                <div
+                  class="flex flex-col items-center justify-center px-6 py-10 mt-2 border border-dashed rounded-lg border-gray-900/25">
                   <div class="text-center">
                     <svg class="w-12 h-12 mx-auto text-gray-300" viewBox="0 0 24 24" fill="currentColor"
                       aria-hidden="true">
@@ -106,11 +129,14 @@ const submitForm = async () => {
                       <label for="file-upload"
                         class="relative font-semibold bg-white rounded-md cursor-pointer text-pr-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-pr-400 focus-within:ring-offset-2 hover:text-pr-400">
                         <span>Upload a file</span>
-                        <input id="file-upload" name="image" type="file" class="sr-only">
+                        <input id="file-upload" name="image" type="file" class="sr-only" @change="handleFileChange">
                       </label>
                       <p class="pl-1">or drag and drop</p>
                     </div>
-                    <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                    <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to</p>
+                  </div>
+                  <div v-if="imagePreview" class="mt-4">
+                    <img :src="imagePreview" alt="Image Preview" class="w-52 h-22 object-cover rounded-md">
                   </div>
                 </div>
                 <!-- @error('image')
@@ -121,7 +147,7 @@ const submitForm = async () => {
               <div class="sm:col-span-3">
                 <label for="status" class="block text-sm font-medium leading-6 text-gray-900">Status</label>
                 <div class="mt-2">
-                  <select id="status" name="status"
+                  <select v-model="formData.status" id="status" name="status"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:max-w-xs sm:text-sm sm:leading-6">
                     <option value="available">Available</option>
                     <option value="unavailable">Unavailable</option>
@@ -156,6 +182,3 @@ const submitForm = async () => {
 
   </ManagerLayout>
 </template>
-
-
-
