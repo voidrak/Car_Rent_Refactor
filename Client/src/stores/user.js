@@ -11,11 +11,24 @@ export const useUserStore = defineStore("userStore", {
 
   actions: {
 
+    /*********************  Get A User ********************** */
 
+    async getUser(user) {
+      const res = await fetch(`/api/users/${user}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json"
+        },
+      });
+      const data = await res.json();
+      // console.log(data);
+      return data;
+    },
 
     /********************* Get All Users  ********************** */
     async getAllUsers() {
-      const res = await fetch('/api/admin/users', {
+      const res = await fetch('/api/users', {
         method: 'GET',
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -34,8 +47,8 @@ export const useUserStore = defineStore("userStore", {
     },
 
     /********************* Delete User  ********************** */
-    async deleteUser(userId) {
-      const res = await fetch(`/api/admin/users/${userId}`, {
+    async deleteUser(user) {
+      const res = await fetch(`/api/users/${user}`, {
         method: 'DELETE',
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -55,7 +68,7 @@ export const useUserStore = defineStore("userStore", {
 
     /********************* Update User Profile   ********************** */
     async updateUserProfile(userData) {
-      const res = await fetch('/api/user/profile', {
+      const res = await fetch(`/api/users/${user}`, {
         method: 'PUT',
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
