@@ -1,5 +1,23 @@
 <script setup>
+import { ref } from 'vue';
+import { useCarStore } from '@/stores/car';
 import ManagerLayout from '@/layout/ManagerLayout.vue';
+
+
+const carStore = useCarStore();
+const formData = ref({
+  brand: '',
+  model: '',
+  engine: '',
+  quantity: '',
+  price_per_day: '',
+  status: '',
+  image: '',
+});
+
+const submitForm = async () => {
+  await carStore.createCar(formData.value);
+};
 
 </script>
 
@@ -7,8 +25,7 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
   <ManagerLayout>
 
     <div class="flex flex-col items-center justify-center max-w-screen-xl mx-auto my-20 ">
-      <form class="w-full ">
-
+      <form @submit.prevent="submitForm" class="w-full">
         <div
           class="md:w-2/3 w-5/6 md:px-24 px-4 pb-8 mx-auto mt-2 space-y-12 bg-white border-2 border-gray-600 rounded-md">
           <div class="pb-12 border-b border-gray-900/10">
@@ -19,7 +36,7 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
               <div class="sm:col-span-3">
                 <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
                 <div class="mt-2">
-                  <input type="text" name="brand" id="brand"
+                  <input v-model="formData.brand" type="text" name="brand" id="brand"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                 </div>
                 <!-- @error('brand')
@@ -32,7 +49,7 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
               <div class="sm:col-span-3">
                 <label for="model" class="block text-sm font-medium leading-6 text-gray-900">Model</label>
                 <div class="mt-2">
-                  <input type="text" name="model" id="model"
+                  <input v-model="formData.model" type="text" name="model" id="model"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                 </div>
                 <!-- @error('model')
@@ -43,7 +60,7 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
               <div class="sm:col-span-2 sm:col-start-1">
                 <label for="engine" class="block text-sm font-medium leading-6 text-gray-900">Engine</label>
                 <div class="mt-2">
-                  <input type="text" name="engine" id="engine"
+                  <input v-model="formData.engine" type="text" name="engine" id="engine"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                 </div>
                 <!-- @error('engine')
@@ -54,7 +71,7 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
               <div class="sm:col-span-2">
                 <label for="quantity" class="block text-sm font-medium leading-6 text-gray-900">Quantity</label>
                 <div class="mt-2">
-                  <input type="text" name="quantity" id="quantity"
+                  <input v-model="formData.quantity" type="number" name="quantity" id="quantity"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                 </div>
                 <!-- @error('quantity')
@@ -73,42 +90,6 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
                                 <span class="text-red-500">{{ $message }}</span>
                             @enderror -->
               </div>
-
-              <div class="sm:col-span-3">
-                <label for="" class="block text-sm font-medium leading-6 text-gray-900">Reduce %
-                </label>
-                <div class="mt-2">
-                  <input type="number" name="reduce" id="reduce"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
-                </div>
-                <!-- @error('reduce')
-                                <span class="text-red-500">{{ $message }}</span>
-                            @enderror -->
-              </div>
-
-              <div class="sm:col-span-3">
-                <label for="stars" class="block text-sm font-medium leading-6 text-gray-900">Car
-                  stars</label>
-                <div class="mt-2">
-                  <select id="stars" name="stars"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:max-w-xs sm:text-sm sm:leading-6">
-                    <option disabled selected value="1">
-                      ⭐⭐⭐⭐⭐
-                    </option>
-                    <option value="1">1/5</option>
-                    <option value="2">2/5</option>
-                    <option value="2">3/5</option>
-                    <option value="4">4/5</option>
-                    <option value="5">5/5</option>
-                  </select>
-                </div>
-                <!-- @error('stars')
-                                <span class="text-red-500">{{ $message }}</span>
-                            @enderror -->
-              </div>
-
-
-
 
               <div class="col-span-full">
                 <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover
@@ -175,3 +156,6 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
 
   </ManagerLayout>
 </template>
+
+
+

@@ -83,7 +83,7 @@ const router = createRouter({
     },
     {
       path: '/manager/cars/car/edit',
-      name: 'AddNewCar',
+      name: 'UpdateCar',
       component: ManagerEditCarPage,
       meta: { manager: true }
     },
