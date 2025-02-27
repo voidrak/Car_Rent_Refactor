@@ -11,20 +11,6 @@ export const useUserStore = defineStore("userStore", {
 
   actions: {
 
-    /*********************  Get A User ********************** */
-
-    async getUser(user) {
-      const res = await fetch(`/api/users/${user}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
-        },
-      });
-      const data = await res.json();
-      // console.log(data);
-      return data;
-    },
 
     /********************* Get All Users  ********************** */
     async getAllUsers() {

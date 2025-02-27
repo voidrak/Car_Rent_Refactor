@@ -106,14 +106,15 @@ router.beforeEach(async (to, from) => {
   }
 
 
+
   if (authStore.user?.role === "admin" && to.meta.guest) {
-    return { name: "adminHome" };
+    return { name: "AdminHome" };
   }
   if (authStore.user?.role === "admin" && to.meta.auth) {
-    return { name: "adminHome" };
+    return { name: "AdminHome" };
   }
   if (authStore.user?.role === "admin" && to.meta.manager) {
-    return { name: "adminHome" };
+    return { name: "AdminHome" };
   }
 
 
@@ -124,9 +125,9 @@ router.beforeEach(async (to, from) => {
   if (!authStore.user && to.meta.auth) {
     return { name: "Login" };
   }
-  if (!authStore.user && to.meta.CustomerService) {
-    return { name: "Login" };
-  }
+
+
+
 });
 
 export default router
