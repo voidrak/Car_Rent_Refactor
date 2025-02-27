@@ -21,7 +21,7 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
 
 
               <!-- Card -->
-              <a href=" ">
+              <RouterLink :to="{ name: 'ManagerCars' }">
                 <div class="flex items-center p-4 bg-white rounded-lg shadow-xs  hover:bg-pr-200 ">
                   <div class="p-3 mr-4 bg-pr-400 rounded-full ">
                     <svg style="fill: #fff" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
@@ -40,10 +40,10 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
                     </p>
                   </div>
                 </div>
-              </a>
+              </RouterLink>
 
               <!-- Card -->
-              <a href="javascript:void(0);" onclick="scrollToReservatios();">
+              <div class="cursor-pointer">
                 <div class="flex items-center p-4 bg-white rounded-lg shadow-xs  hover:bg-pr-200 ">
                   <div class="p-3 mr-4 bg-pr-400 rounded-full ">
                     <svg style="fill: #fff" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
@@ -62,7 +62,7 @@ import ManagerLayout from '@/layout/ManagerLayout.vue';
                     </p>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
 
 

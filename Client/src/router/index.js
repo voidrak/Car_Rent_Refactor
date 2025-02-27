@@ -8,6 +8,9 @@ import CarsListPage from '@/views/User/CarsListPage.vue'
 import CarReservationPage from '@/views/User/CarReservationPage.vue'
 import AdminHome from '@/views/Admin/AdminHome.vue'
 import ManagerHome from '@/views/Manager/ManagerHome.vue'
+import ManagerCarsPage from '@/views/Manager/ManagerCarsPage.vue'
+import ManagerAddCarPage from '@/views/Manager/ManagerAddCarPage.vue'
+import ManagerEditCarPage from '@/views/Manager/ManagerEditCarPage.vue'
 
 
 
@@ -63,6 +66,24 @@ const router = createRouter({
       path: '/manager/home',
       name: 'ManagerHome',
       component: ManagerHome,
+      meta: { manager: true }
+    },
+    {
+      path: '/manager/cars',
+      name: 'ManagerCars',
+      component: ManagerCarsPage,
+      meta: { manager: true }
+    },
+    {
+      path: '/manager/add-car',
+      name: 'AddNewCar',
+      component: ManagerAddCarPage,
+      meta: { manager: true }
+    },
+    {
+      path: '/manager/cars/car/edit',
+      name: 'AddNewCar',
+      component: ManagerEditCarPage,
       meta: { manager: true }
     },
 

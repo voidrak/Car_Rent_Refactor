@@ -7,9 +7,9 @@
   <header>
     <nav class="bg-sec-600 border-gray-200 px-4 lg:px-6 py-4 ark:bg-gray-800 ">
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl drop-shadow-2xl">
-        <a href="{{ route('home') }}" class="flex items-center">
+        <div class="flex items-center">
           <img loading="lazy" src="/images/carLogo.png" class="mr-3 h-12" alt="Flowbite Logo" />
-        </a>
+        </div>
         <div class="flex items-center  lg:order-2">
           <RouterLink :to="{ name: 'Login' }">
             <button type="button"

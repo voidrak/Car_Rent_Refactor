@@ -7,9 +7,9 @@
     <nav class="bg-sec-600 border-gray-200 px-4 lg:px-6 py-4 ark:bg-gray-800">
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
 
-        <a href=" }" class="flex items-center">
-          <img loading="lazy" src="/images/carLogo.png" class="mr-3 h-12" alt="Flowbite Logo" />
-        </a>
+        <div class="flex items-center">
+          <img loading="lazy" src="/images/carLogo.png" class="mr-3 h-12" alt="  Logo" />
+        </div>
         <div class="hidden justify-between mb-6 items-center w-full lg:flex lg:w-auto" id="mobile-menu-2">
           <ul class="flex flex-col  font-medium lg:flex-row lg:space-x-8 lg:mt-0 ">
 
